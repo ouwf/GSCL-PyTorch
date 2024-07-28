@@ -20,12 +20,12 @@ $ stylegan2_pytorch --data "path_to_training_data" --name fv_netcap16_bs5ac6 --i
 ```
 
 ## Generate vein images with trained ckpt
-### You can use the script `sample_image.py` to generate arbitrary number of vein images one by one, such as
+You can use the script `sample_image.py` to generate arbitrary number of vein images one by one, such as
 ```bash
 $ python sample_image.py --base-dir "path_to_base_dir" --project-name "your_project_name" --ckpt-idx 150 --num-samples 100
 ```
 
-### After generation, you can evaluate the FID score by
+After generation, you can evaluate the FID score by
 ```bash
 $ python -m pytorch_fid "path_to_real_vein_images" "path_to_generated_vein_images"
 ```
