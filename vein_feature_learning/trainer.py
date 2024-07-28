@@ -69,7 +69,7 @@ class BYOLTrainer:
                 print(utils.dt(), 'Epoch:[%d]-[%d/%d] batchLoss:%.4f averLoss:%.4f' %
                       (epoch, batch_idx, len(trainloader), loss_stats.val, loss_stats.avg))
 
-            roc, aver, auc = evaluate_verification(self.online_network, testloader, self.device)
+            roc, aver, auc = evaluate_verification(self.online_network, testloader, self.device, not self.args.simple_eval)
             self.lr_scheduler.step()
             # save the current best model based on eer
             best_result, best_snapshot = \
@@ -133,7 +133,7 @@ class SimCLRTrainer:
                 print(utils.dt(), 'Epoch:[%d]-[%d/%d] batchLoss:%.4f averLoss:%.4f' %
                       (epoch, batch_idx, len(trainloader), loss_stats.val, loss_stats.avg))
 
-            roc, aver, auc = evaluate_verification(self.online_network, testloader, self.device)
+            roc, aver, auc = evaluate_verification(self.online_network, testloader, self.device, not self.args.simple_eval)
             self.lr_scheduler.step()
             # save the current best model based on eer
             best_result, best_snapshot = \
@@ -223,7 +223,7 @@ class SupervisedTrainer:
                 print(utils.dt(), 'Epoch:[%d]-[%d/%d] batchLoss:%.4f averLoss:%.4f' %
                       (epoch, batch_idx, len(trainloader), loss_stats.val, loss_stats.avg))
 
-            roc, aver, auc = evaluate_verification(self.network, testloader, self.device)
+            roc, aver, auc = evaluate_verification(self.network, testloader, self.device, not self.args.simple_eval)
             self.lr_scheduler.step()
             # save the current best model based on eer
             best_result, best_snapshot = \

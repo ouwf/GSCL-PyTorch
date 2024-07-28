@@ -27,6 +27,7 @@ def parse_args():
     parser.add_argument('--trainset', type=str, help='train set path')
     parser.add_argument('--testset', type=str, help='test set path')
     parser.add_argument("--save_image", action='store_true', help="save the augmented images during training")
+    parser.add_argument('--simple_eval', action='store_true', help="whether to use simplified evaluation protocol")
     args = parser.parse_args()
     return args
 
@@ -48,7 +49,7 @@ def main():
     elif args.dataset_name.lower() == "palmvein":
         sample_per_class = 20
     else:
-        ValueError("Dataset not supported!")
+        raise ValueError("Dataset not supported!")
 
     data_transform_train, data_transform_test = get_transforms_ssl(args.dataset_name)
     train_dataset = VeinDataset(root=args.trainset, transform=MultiViewDataInjector([data_transform_train, data_transform_train]), num_samples=args.synthetic_num, sample_per_class=1)
@@ -92,14 +93,13 @@ def main():
                                 save_image=args.save_image,
                                 args=args)
     else:
-        ValueError(f"Invalid option {args.loss}")
+        raise ValueError(f"Invalid option {args.loss}")
 
     trainer.train(trainloader, testloader)
 
 
 if __name__ == '__main__':
     args = parse_args()
-    # args.lr = 0.12 * args.batch_size / 256
     print(args)
     set_seed(args.seed)
     main()

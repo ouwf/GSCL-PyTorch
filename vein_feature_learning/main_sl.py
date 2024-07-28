@@ -13,7 +13,7 @@ def parse_args():
     parser.add_argument('--dataset_name', type=str, default='FVUSM', help='name of the dataset')
     parser.add_argument('--trainset', type=str, help='train set path')
     parser.add_argument('--testset', type=str, help='test set path')
-    parser.add_argument('--network', type=str, default='resnet18', help='name of the network')
+    parser.add_argument('--network', type=str, default='resnet18', help='name of the network: {resnet18, resnet34, resnet50}')
     parser.add_argument('--load_from', type=str, default=None, help='load pretrained model')
     parser.add_argument('--head_type', type=str, default='cls_norm', help='the type of head: {cls_norm, cls, simclr, byol}')
     parser.add_argument('--loss', type=str, default='fusionloss', help="loss function: {softmax, cosface, tripletloss, fusionloss}")
@@ -35,8 +35,8 @@ def parse_args():
     parser.add_argument('--max_epoch', type=int, default=80, help='margin')
     parser.add_argument('--batch_size', type=int, default=64, help='batch size')
     parser.add_argument('--seed', type=int, default=1, help='random seed for repeating results')
-    parser.add_argument("--multi_gpu", action='store_true', help="use multiple GPUs")
     parser.add_argument("--save_image", action='store_true', help="save the augmented image pairs during training")
+    parser.add_argument('--simple_eval', action='store_true', help="whether to use simplified evaluation protocol")
     args = parser.parse_args()
     return args
 
@@ -54,10 +54,8 @@ def main():
     print(f"Training with: {device}")
     if args.dataset_name.lower() == "fvusm":
         sample_per_class = 12
-    elif args.dataset_name.lower() == "palmvein":
-        sample_per_class = 20
     else:
-        ValueError("Dataset %s not supported!" % args.dataset_name)
+        raise ValueError("Dataset %s not supported!" % args.dataset_name)
 
     transform_train, transform_test = get_transforms_sl(args.dataset_name, args.intra_aug)
     trainset = VeinDataset(root=args.trainset, sample_per_class=sample_per_class, transform=transform_train, inter_aug=args.inter_aug)
@@ -100,7 +98,6 @@ def main():
 
 if __name__ == '__main__':
     args = parse_args()
-    # args.lr = 0.12 * args.batch_size / 256
     print(args)
     set_seed(args.seed)
     main()

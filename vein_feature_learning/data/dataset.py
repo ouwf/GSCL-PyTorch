@@ -27,14 +27,14 @@ class VeinDataset(data.Dataset):
         self.labels = np.arange(self.class_num).repeat(sample_per_class)
         self.img_data = [cv2.imread(os.path.join(root, self.files[i])) for i in np.arange(0, len(self.files))]
         if inter_aug is not None:
-            if inter_aug == 'LR':  # left-right (horizontal) flip
+            if inter_aug == 'LR':  # left-right (horizontal) flipping for inter-class data augmentation
                 # self.img_data.extend([self.img_data[i].transpose(Image.FLIP_LEFT_RIGHT) for i in np.arange(0, len(self.img_data))])
                 self.img_data.extend([self.img_data[i][:, ::-1, :] for i in np.arange(0, len(self.img_data))])
-            elif inter_aug == 'TB':  # top-bottom (vertical) flip
+            elif inter_aug == 'TB':  # top-bottom (vertical) flipping for inter-class data augmentation
                 # self.img_data.extend([self.img_data[i].transpose(Image.FLIP_TOP_BOTTOM) for i in np.arange(0, len(self.img_data))])
                 self.img_data.extend([self.img_data[i][::-1, :, :] for i in np.arange(0, len(self.img_data))])
             else:
-                ValueError(f"{inter_aug} is not a valid option.")
+                raise ValueError(f"{inter_aug} is not a valid option.")
             aug_classes = np.arange(self.class_num, self.class_num * 2).repeat(sample_per_class)
             self.labels = np.concatenate([self.labels, aug_classes])
             self.class_num = self.class_num * 2
@@ -95,10 +95,8 @@ def get_transforms_ssl(dataset):
         transform_train.append(transforms.RandomRotation(degrees=3))
         transform_train.append(transforms.RandomPerspective(distortion_scale=0.3, p=0.9))
         transform_train.append(transforms.ColorJitter(brightness=0.7, contrast=0.7))
-    elif dataset.lower() == 'palmvein':
-        transform_train.append(transforms.ColorJitter(brightness=0.9, contrast=0.9))
     else:
-        ValueError(f"Dataset {dataset} not supported!")
+        raise ValueError(f"Dataset {dataset} not supported!")
 
     transform_train.append(transforms.ToTensor())
     transform_train.append(normalize)
@@ -117,10 +115,8 @@ def get_transforms_sl(dataset, data_aug=True):
             transform_train.append(transforms.RandomRotation(degrees=3))
             transform_train.append(transforms.RandomPerspective(distortion_scale=0.3, p=0.9))
             transform_train.append(transforms.ColorJitter(brightness=0.7, contrast=0.7))
-        elif dataset.lower() == 'palmvein':
-            transform_train.append(transforms.RandomResizedCrop(size=(128, 128), scale=(0.9, 1.0), ratio=(1.0, 1.0)))
         else:
-            ValueError(f"Dataset {dataset} not supported!")
+            raise ValueError(f"Dataset {dataset} not supported!")
     transform_train.append(transforms.ToTensor())
     transform_train.append(normalize)
     transform_train = transforms.Compose(transform_train)

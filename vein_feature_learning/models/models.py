@@ -6,7 +6,7 @@ import math
 
 
 class ResNets(torch.nn.Module):
-    def __init__(self, backbone, head_type, num_classes=None, **kwargs):
+    def __init__(self, backbone, head_type, num_classes=10, **kwargs):
         super(ResNets, self).__init__()
         if backbone == 'resnet18':
             resnet = models.resnet18(pretrained=True)
@@ -15,7 +15,7 @@ class ResNets(torch.nn.Module):
         elif backbone == 'resnet50':
             resnet = models.resnet50(pretrained=True)
         else:
-            ValueError(f'{backbone} is not supported')
+            raise ValueError(f'{backbone} is not supported')
 
         self.backbone = torch.nn.Sequential(*list(resnet.children())[:-1])
         if head_type == "simclr":
@@ -27,7 +27,7 @@ class ResNets(torch.nn.Module):
         elif head_type == "cls":
             self.head = nn.Linear(resnet.fc.in_features, num_classes)
         else:
-            ValueError(f'{head_type} not supported.')
+            raise ValueError(f'{head_type} not supported.')
 
     def forward(self, x):
         h = torch.squeeze(self.backbone(x))

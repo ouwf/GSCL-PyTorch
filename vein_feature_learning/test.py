@@ -17,6 +17,7 @@ def parse_args():
     parser.add_argument('--data', type=str, help="path of the testing dataset")
     parser.add_argument('--dataset_name', type=str, default='FVUSM', help="name of the dataset")
     parser.add_argument('--network', type=str, default='resnet18', help="name of the network")
+    parser.add_argument('--simple_eval', action='store_true', help="whether to use simplified evaluation protocol")
     args = parser.parse_args()
     return args
 
@@ -35,7 +36,7 @@ def main():
     testloader = DataLoader(dataset=testset, batch_size=64, shuffle=False, num_workers=4, pin_memory=True)
 
     # we don't use the head's outputs during testing, so the head type has no effect on the test results.
-    model = ResNets(backbone=args.network, head_type='simclr').to(device)
+    model = ResNets(backbone=args.network, head_type='cls').to(device)
     # load checkpoint
     ckpt = torch.load(args.ckpt)['model']
     current_dict = model.state_dict()
@@ -44,7 +45,7 @@ def main():
     model.load_state_dict(current_dict)
     model = model.to(device)
     # evaluate biometric verification performance
-    evaluate_verification(model, testloader, device, two_session=True)
+    evaluate_verification(model, testloader, device, two_session=not args.simple_eval)
 
 
 if __name__ == '__main__':
