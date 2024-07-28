@@ -39,7 +39,7 @@ $ python -m pytorch_fid "path_to_real_vein_images" "path_to_generated_vein_image
 
 ## Acknowledgement
 * The code is largely built upon the public implementation of [stylegan2-pytorch](https://github.com/lucidrains/stylegan2-pytorch). We only made necessary modifications to adapt the code to vein image data where finger vein and palm vein images usually have different aspect ratios.
-* The copyright of the [FV-USM database]((http://drfendi.com/fv_usm_database/)) is owned by Dr. Bakhtiar Affendi Rosdi, School of Electrical and Electronic Engineering, USM.
+* The copyright of the [FV-USM database](http://drfendi.com/fv_usm_database/) is owned by Dr. Bakhtiar Affendi Rosdi, School of Electrical and Electronic Engineering, USM.
 
 ## Citation
 ```bibtex

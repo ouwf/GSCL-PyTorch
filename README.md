@@ -41,10 +41,10 @@ $ pip install -e vein_image_generation
 ```
 
 ## Usage & results of vein image generation
-Plese refer to [README](./vein_image_generation/README.md)
+Please refer to [README](./vein_image_generation/README.md)
 
 ## Usage & results of vein feature learning for biometric verification
-Plese refer to [README](./vein_feature_learning/README.md)
+Please refer to [README](./vein_feature_learning/README.md)
 
 ## Citation
 ```bibtex
