@@ -46,12 +46,11 @@ def main():
 
     if args.dataset_name.lower() == "fvusm":
         sample_per_class = 12
-    elif args.dataset_name.lower() == "palmvein":
-        sample_per_class = 20
+        img_size = (64, 128)
     else:
         raise ValueError("Dataset not supported!")
 
-    data_transform_train, data_transform_test = get_transforms_ssl(args.dataset_name)
+    data_transform_train, data_transform_test = get_transforms_ssl(args.dataset_name, img_size=img_size)
     train_dataset = VeinDataset(root=args.trainset, transform=MultiViewDataInjector([data_transform_train, data_transform_train]), num_samples=args.synthetic_num, sample_per_class=1)
     trainloader = DataLoader(train_dataset, batch_size=args.batch_size, num_workers=4, drop_last=False, shuffle=True, pin_memory=True)
 
