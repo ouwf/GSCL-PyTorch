@@ -29,7 +29,7 @@ $ bash run_finetune_fusionaug.sh "path_to_trainset" "path_to_testset"
 
 ## Testing
 ```bash
-$ python3 -u ./test.py --ckpt "path_to_checkpoint" --data "path_to_testset" --dataset_name "name of dataset, default: FVUSM" --network "name of network, default: resnet18"
+$ python3 -u ./test.py --ckpt "path_to_checkpoint" --data "path_to_testset" --samples_per_class "the number of samples in each vein class, e.g. 12 for fvusm" --network "name of network, default: resnet18"
 ```
 
 ## Results

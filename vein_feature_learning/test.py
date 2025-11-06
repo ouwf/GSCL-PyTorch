@@ -15,7 +15,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--ckpt', type=str, help="checkpoint path")
     parser.add_argument('--data', type=str, help="path of the testing dataset")
-    parser.add_argument('--dataset_name', type=str, default='FVUSM', help="name of the dataset")
+    parser.add_argument('--samples_per_class', type=int, help="the number of images in each vein class, e.g., 12 for fvusm")
     parser.add_argument('--network', type=str, default='resnet18', help="name of the network")
     parser.add_argument('--simple_eval', action='store_true', help="whether to use simplified evaluation protocol")
     args = parser.parse_args()
@@ -25,14 +25,10 @@ def parse_args():
 def main():
     args = parse_args()
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    if args.dataset_name.lower() == 'fvusm':
-        sample_per_class = 12
-    else:
-        raise ValueError('Dataset %s not exists!' % (args.dataset))
-    # testing set
+
     normalize = transforms.Normalize(mean=[0.5, ], std=[0.5, ])
     transform_test = transforms.Compose([transforms.ToTensor(), normalize])
-    testset = VeinDataset(root=args.data, sample_per_class=sample_per_class, transform=transform_test)
+    testset = VeinDataset(root=args.data, sample_per_class=args.samples_per_class, transform=transform_test)
     testloader = DataLoader(dataset=testset, batch_size=64, shuffle=False, num_workers=4, pin_memory=True)
 
     # we don't use the head's outputs during testing, so the head type has no effect on the test results.
