@@ -3,8 +3,8 @@
 PyTorch implementation of the feature learning scheme in [GSCL: Generative Self-supervised Contrastive Learning for Vein-based Biometric Verification](https://ieeexplore.ieee.org/abstract/document/10428026).
 
 ## Data preparation
-1. Download the [synthetic finger vein sample set](https://portland-my.sharepoint.com/:u:/g/personal/weifengou2-c_my_cityu_edu_hk/EdltFgKYephGonGXunb7zX0B1moW2dg283bZ3GLfrYpfGw?e=OP3Xxe) for model pretraining.
-2. Download the [preprocessed FV-USM dataset](https://portland-my.sharepoint.com/:u:/g/personal/weifengou2-c_my_cityu_edu_hk/EZR-zf6MCxJOikdLh5Eb7X0BeiJEiIZ6cFLRWgCFdEWf-Q?e=uOV5aE) for model finetuning.
+1. Download the [synthetic finger vein sample set](https://1drv.ms/u/c/97276e968784ca47/IQA8-cff2Y-JQrIxa0HgVecAAedvZvW28De2lD7YFUmSqJ8?e=hR2bFh) for model pretraining.
+2. Download the [preprocessed FV-USM dataset](https://1drv.ms/u/c/97276e968784ca47/IQCbyOXhRfaVTpe6Kbj8Vu18AWm-ku8iOTQ_AONRK2HHk8I?e=resmVB) for model finetuning.
 
 ## Training
 ### Pretrain resnet-18 on synthetic fv samples with SimCLR
