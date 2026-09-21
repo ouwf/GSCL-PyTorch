@@ -3,8 +3,8 @@
 PyTorch implementation of the feature learning scheme in [GSCL: Generative Self-supervised Contrastive Learning for Vein-based Biometric Verification](https://ieeexplore.ieee.org/abstract/document/10428026).
 
 ## Data preparation
-1. Download the [synthetic finger vein sample set](https://1drv.ms/u/c/97276e968784ca47/IQA8-cff2Y-JQrIxa0HgVecAAedvZvW28De2lD7YFUmSqJ8?e=hR2bFh) for model pretraining.
-2. Download the [preprocessed FV-USM dataset](https://1drv.ms/u/c/97276e968784ca47/IQCbyOXhRfaVTpe6Kbj8Vu18AWm-ku8iOTQ_AONRK2HHk8I?e=resmVB) for model finetuning.
+1. Download the [synthetic finger vein sample set](https://1drv.ms/u/c/97276e968784ca47/IQCNbC8zfO3gS7SCcWuI4EluASW8Ww8BwS8spgg9l_D3p2Q?e=fQfxaf) for model pretraining.
+2. Download the [preprocessed FV-USM dataset](https://1drv.ms/u/c/97276e968784ca47/IQBQT6aUmSGmTaw3JfT9r8mdAc7MT3PJwAoMGGRlAOujjTg?e=z2gUg4) for model finetuning.
 
 ## Training
 ### Pretrain resnet-18 on synthetic fv samples with SimCLR
@@ -38,11 +38,11 @@ We follow the open-set evaluation protocol and divide the FV-USM database by a t
 
 |         Method         |      Network      | EER(%) | FRR(%)@FAR=0.01 | FRR(%)@FAR=0.001 | FRR(%)@FAR=0.0001 |
 |:----------------------:|:-----------------:|:------:|:---------------:|:----------------:|:-----------------:|
-|      FusionAug         |   [Resnet-18](https://portland-my.sharepoint.com/:u:/g/personal/weifengou2-c_my_cityu_edu_hk/EaVtgan6kf5Lp9c1hU03cDgBkgZhqYZDctpWEalpIgzMSw?e=kuLdoa)   |  0.33  |      0.16       |       0.99       |       4.51        |
-|         SimCLR         |   [Resnet-18](https://portland-my.sharepoint.com/:u:/g/personal/weifengou2-c_my_cityu_edu_hk/EV7EYqd6Rr5Am5pLAFRB4kUBxe3QxsKkuhj9Ax-JlJC8Og?e=olKWV3)   |  1.03  |      1.03       |       5.32       |       11.39       |
-| GSCL(SimCLR+FusionAug) |   [Resnet-18](https://portland-my.sharepoint.com/:u:/g/personal/weifengou2-c_my_cityu_edu_hk/ERUnbGwTn9JJh4f4QfT25lUB0YxiS0wdcs6KDQX5ZLgMXw?e=aKu6C7)   |  0.18  |      0.02       |       0.45       |       2.47        |
-|          BYOL          |   [Resnet-18](https://portland-my.sharepoint.com/:u:/g/personal/weifengou2-c_my_cityu_edu_hk/Ef9vc9LNJi1OrzLibjoXnhQBvm_eygATNiJaXC6og9WyFg?e=HJJpIW)   |  4.00  |      8.72       |      22.13       |       37.82       |
-|  GSCL(BYOL+FusionAug)  |   [Resnet-18](https://portland-my.sharepoint.com/:u:/g/personal/weifengou2-c_my_cityu_edu_hk/EaS0wCDucvVLk07Tguts2_IBJDh1KFIR59VXLx_p6MemJg?e=FXbwvB)   |  0.51  |      0.27       |       2.16       |       8.11        |
+|      FusionAug         |   [Resnet-18](https://1drv.ms/u/c/97276e968784ca47/IQCvf-aqhkf1Tr2_MQpbH7C-AaLfYkgAYV7NDyVuCMAHq_c?e=SOHY7F)   |  0.33  |      0.16       |       0.99       |       4.51        |
+|         SimCLR         |   [Resnet-18](https://1drv.ms/u/c/97276e968784ca47/IQBXPPvNd3f9T7Bp1oIOHITvAbr8WCdpRd2wUbxK6v2eHnI?e=Thdobw)   |  1.03  |      1.03       |       5.32       |       11.39       |
+| GSCL(SimCLR+FusionAug) |   [Resnet-18](https://1drv.ms/u/c/97276e968784ca47/IQALfay-sLFSTLqT8ZWBG003ARUjILhsiqrBbLEoc3anUTA?e=WbMsvI)   |  0.18  |      0.02       |       0.45       |       2.47        |
+|          BYOL          |   [Resnet-18](https://1drv.ms/u/c/97276e968784ca47/IQDd33jnHCrmTKGcVunKTryPAR7dJVYKGXbLImGMxWBgXdY?e=JecCoz)   |  4.00  |      8.72       |      22.13       |       37.82       |
+|  GSCL(BYOL+FusionAug)  |   [Resnet-18](https://1drv.ms/u/c/97276e968784ca47/IQD688L6TtvqTbknARu8pSUuAQzJM_l5oDRh5ppSnSOgNnM?e=erA9Y4)   |  0.51  |      0.27       |       2.16       |       8.11        |
 
 
 ## Acknowledgement
