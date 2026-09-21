@@ -3,7 +3,7 @@
 PyTorch implementation of using [stylegan2](https://github.com/NVlabs/stylegan2) for vein image generation to tackle the data shortage problem, introduced in [GSCL: Generative Self-supervised Contrastive Learning for Vein-based Biometric Verification](https://ieeexplore.ieee.org/abstract/document/10428026).
 
 ## Data preparation
-Download the [preprocessed FV-USM database](https://1drv.ms/u/c/97276e968784ca47/IQCbyOXhRfaVTpe6Kbj8Vu18AWm-ku8iOTQ_AONRK2HHk8I?e=resmVB), which has been divided by a trainset and a testset. The trainset is used for training the generative models, while the testset is used for evaluating the biometric verification performance later.
+Download the [preprocessed FV-USM database](https://1drv.ms/u/c/97276e968784ca47/IQBQT6aUmSGmTaw3JfT9r8mdAc7MT3PJwAoMGGRlAOujjTg?e=z2gUg4), which has been divided by a trainset and a testset. The trainset is used for training the generative models, while the testset is used for evaluating the biometric verification performance later.
 
 ## Training
 ### Quickstart
